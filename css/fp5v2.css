@@ -232,7 +232,7 @@
 .fp5-gap-4 { gap: var(--fp5-space-4) !important; }
 
 /* Hidden utility */
-.hidden { display: none !important; }
+.fp5-hidden { display: none !important; }
 
 /* ─── MEDIA QUERIES (Foundation Breakpoints) ─── */
 @media (min-width: 600px) {
