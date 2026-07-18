@@ -437,6 +437,7 @@
     .ficha-multimedia-item, .ficha-multimedia-item-disabled { font-size: 1rem !important; padding: 0.75rem 1.5rem !important; }
   }
   @media (max-width: 767px) {
+    .fp5-hero { display: none !important; }
     .fp5-feature-text { font-size: 1rem; }
     
   }
@@ -490,3 +491,51 @@
   @media (max-width: 767px) {
     .fp5-disenos-header { padding-left: 0 !important; padding-right: 0 !important; }
   }
+
+/* =========================================
+   PARCHES Y HOTFIXES GLOBALES 
+   ========================================= */
+
+/* HOTFIX AOS: Evita que las animaciones rompan el scroll y los clics */
+.editorial-column-article [data-aos] { 
+  opacity: 1 !important; 
+  transform: none !important; 
+  transition: none !important; 
+}
+
+/* HOTFIX CAPAS: Evitar que las manchas invisibles bloqueen clics */
+.fp5-hero-content, 
+.fp5-hero-buttons {
+  position: relative !important;
+  z-index: 50 !important;
+}
+.fp5-blob { 
+  pointer-events: none !important; 
+}
+
+/* HOTFIX NAVBAR: Fuerza la visibilidad en desktop */
+@media (min-width: 768px) {
+  #navbar .md\:flex { display: flex !important; }
+}
+
+/* HOTFIX UTILIDAD: Ocultar forzosamente */
+.fp5-hidden { 
+  display: none !important; 
+}
+
+/* HOTFIX HERO: Rescatar en versión móvil (sobrescribe la regla que lo ocultaba) */
+@media (max-width: 767px) {
+  section.fp5-hero { display: flex !important; }
+}
+
+/* HOTFIX COMPARTIR: Globo de Compartir en Desktop (Hacia abajo) */
+@media (min-width: 768px) {
+  .fp5-share-group .fp5-share-dropdown {
+    top: 100% !important;
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem !important;
+  }
+}
