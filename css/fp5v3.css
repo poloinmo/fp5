@@ -385,10 +385,6 @@
   .fp5-disclaimer-custom { width: 100% !important; max-width: none !important; color: var(--fp5-text-light) !important; font-size: 14px !important; line-height: 21px !important; }
   .fp5-title-custom-xl { font-size: 32px; line-height: 35px; margin-top: 1.5rem; margin-bottom: 1.5rem; }
 
-  /* FIX 7: Diseños pensados */
-
-  /* FIX 15: 102m2 on mobile */
-
   /* PATCH 3 FIXES */
   .fp5-process-card .fp5-icon-box { margin-bottom: 1rem; }
   .fp5-feature-icon-center { margin: 0 auto var(--fp5-space-3) !important; }
@@ -409,17 +405,9 @@
   .fp5-process-card .fp5-title-md { margin-bottom: 1rem !important; }
   .fp5-process-card p { margin-top: 0 !important; }
 
-  /* PATCH 7 FIXES */
-
-  /* PATCH 9 FIXES */
-
-  /* PATCH 10 FIXES */
-
-/* =========================================
+  /* =========================================
    PARCHES Y HOTFIXES GLOBALES 
    ========================================= */
-
-/* HOTFIX AOS: Evita que las animaciones rompan el scroll y los clics */
 
 /* HOTFIX CAPAS: Evitar que las manchas invisibles bloqueen clics */
 .fp5-hero-content, 
@@ -430,14 +418,6 @@
 .fp5-blob { 
   pointer-events: none !important; 
 }
-
-/* HOTFIX NAVBAR: Fuerza la visibilidad en desktop */
-
-/* HOTFIX UTILIDAD: Ocultar forzosamente */
-
-/* HOTFIX HERO: Rescatar en versión móvil (sobrescribe la regla que lo ocultaba) */
-
-/* HOTFIX COMPARTIR: Globo de Compartir en Desktop (Hacia abajo) */
 
 @media (min-width: 768px) {
   .fp5-title-xl { font-size: 2.75rem; }
