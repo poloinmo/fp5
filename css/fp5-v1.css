@@ -386,8 +386,8 @@
   @keyframes fp5-fade-in { from { opacity: 0; } to { opacity: 1; } }
 
   /* ─── MULTIMEDIA VIEWPORT ─── */
-  .fp5-media-viewport { display: none; }
-  .fp5-media-viewport.is-visible { display: block; animation: fp5-fade-in 0.5s ease-out forwards; }
+  .fp5-media-viewport { display: none !important; }
+  .fp5-media-viewport.is-visible { display: block !important; animation: fp5-fade-in 0.5s ease-out forwards; }
   .fp5-media-embed { width: 100%; aspect-ratio: 16/9; background-color: #000 !important; border-radius: var(--fp5-radius-md); overflow: hidden; margin-bottom: 1rem; box-sizing: border-box; padding: 0 !important; }
   .fp5-media-embed iframe { width: 100%; height: 100%; border: none; display: block; }
 
