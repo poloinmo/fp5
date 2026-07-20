@@ -416,6 +416,10 @@
   .fp5-blob-pos-1 { top: 0; left: 25%; }
   .fp5-blob-pos-2 { bottom: 0; right: 25%; }
 
+  /* ─── PROPERTY SPECS ─── */
+  .fp5-feature-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0.5rem; }
+  .fp5-feature-text { font-size: var(--fp5-font-size-sm); color: var(--fp5-text-soft); font-weight: 500; }
+
   /* FIX 2: Margins for Typography */
   .fp5-title-lg.fp5-text-center { margin-bottom: var(--fp5-space-3); }
   .fp5-text-lead.fp5-text-center { margin: 0 auto var(--fp5-space-5); max-width: 600px; }
