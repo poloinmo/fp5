@@ -2,6 +2,7 @@
 :root {
   /* Colors */
   --fp5-color-primary: #16202a;
+  --fp5-color-primary-light: rgba(22, 32, 42, 0.08);
   --fp5-color-accent: #ab0030;
   --fp5-color-accent-light: rgba(171, 0, 48, 0.05);
   --fp5-color-accent-border: rgba(171, 0, 48, 0.1);
@@ -144,7 +145,7 @@
 .fp5-icon-box.is-accent { background-color: var(--fp5-color-accent-light); color: var(--fp5-color-accent); }
 .fp5-icon-box.is-solid { background-color: var(--fp5-color-accent); color: var(--fp5-text-white); box-shadow: 0 6px 12px -2px rgba(0,0,0,0.1); }
 .fp5-icon-box.is-danger { background-color: rgba(220, 38, 38, 0.1); color: var(--fp5-text-danger); }
-.fp5-icon-box.is-primary { background-color: var(--fp5-color-primary-light, rgba(22,32,42,0.08)); color: var(--fp5-color-primary); }
+.fp5-icon-box.is-primary { background-color: var(--fp5-color-primary-light); color: var(--fp5-color-primary); }
 .fp5-icon-box.is-glow { box-shadow: var(--fp5-shadow-glow); }
 /* Hover behaviors inherited by parent */
 .fp5-card.is-interactive:hover .fp5-icon-box.is-accent { background-color: var(--fp5-color-accent); color: var(--fp5-text-white); transform: scale(1.1); }
@@ -501,16 +502,14 @@
     .polo-ti-page .ficha-multimedia-item i, .polo-ti-page .ficha-multimedia-item-disabled i { font-size: 1rem; }
   .fp5-header-flex { flex-direction: column; gap: 1rem; align-items: flex-start; }
     .fp5-price-container { align-items: flex-start; }
-  .fp5-grid.cols-6 { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-    .fp5-feature-item { padding: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .fp5-feature-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     .polo-ti-page .fp5-feature-item .fp5-icon-box { width: 2.5rem; height: 2.5rem; font-size: 1.25rem; margin: 0 auto 0.5rem auto; }
   .fp5-feature-text { font-size: 1rem; }
-  #Header1, .Header { display: none !important; }
-    .fp5-mobile-cols-2 { grid-template-columns: 1fr 1fr !important; gap: 0.5rem !important; }
+   #Header1, .Header { display: none !important; }
   .fp5-grid-disenos { grid-template-columns: 1fr; padding-left: 0; padding-right: 0; }
     .fp5-grid-disenos-inner { grid-template-columns: 1fr 1fr !important; gap: 0.5rem !important; }
   .fp5-share-group:hover .fp5-share-dropdown, .fp5-share-group:focus-within .fp5-share-dropdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; width: max-content; }
     .fp5-share-dropdown { display: none; }
-  .fp5-mobile-cols-2 .fp5-card, .fp5-grid-disenos-inner .fp5-card { padding: 0.75rem; }
+  .fp5-cards-grid.is-mobile-2 .fp5-card, .fp5-grid-disenos-inner .fp5-card { padding: 0.75rem; }
   .fp5-disenos-header { padding-left: 0; padding-right: 0; }
 }
