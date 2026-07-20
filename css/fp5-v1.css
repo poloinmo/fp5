@@ -112,7 +112,7 @@
 .fp5-btn.is-ghost:hover { color: var(--fp5-color-accent); }
 .fp5-btn.is-icon { padding: 0.5rem; font-size: 1.25rem; }
 .fp5-btn.is-round { border-radius: 50%; }
-.fp5-btn.is-active { border-color: var(--fp5-color-accent) !important; background-color: var(--fp5-color-accent) !important; color: var(--fp5-text-white) !important; }
+.fp5-btn.is-active { border-color: var(--fp5-color-accent); color: var(--fp5-color-accent); }
 .fp5-btn.is-block { width: 100%; }
 .fp5-btn.is-between { justify-content: space-between; }
 .fp5-btn.is-left { justify-content: flex-start; }
