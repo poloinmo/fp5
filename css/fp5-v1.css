@@ -128,7 +128,7 @@
 .fp5-card.is-interactive:hover { transform: translateY(-5px); box-shadow: var(--fp5-shadow-lg); background-color: var(--fp5-color-surface); border-color: var(--fp5-color-border); }
 .fp5-card.is-dark.is-interactive:hover { background-color: var(--fp5-color-primary); border-color: var(--fp5-color-border-dark); color: var(--fp5-text-white); }
 .fp5-card.is-centered { align-items: center; text-align: center; }
-.fp5-card.p-0 { padding: 0; }
+.fp5-card.is-flush { padding: 0; }
 
 /* 3. ICON BOXES (.fp5-icon-box) */
 .fp5-icon-box { 
@@ -143,6 +143,7 @@
 .fp5-icon-box.is-accent { background-color: var(--fp5-color-accent-light); color: var(--fp5-color-accent); }
 .fp5-icon-box.is-solid { background-color: var(--fp5-color-accent); color: var(--fp5-text-white); box-shadow: 0 6px 12px -2px rgba(0,0,0,0.1); }
 .fp5-icon-box.is-danger { background-color: rgba(220, 38, 38, 0.1); color: var(--fp5-text-danger); }
+.fp5-icon-box.is-primary { background-color: var(--fp5-color-primary-light, rgba(22,32,42,0.08)); color: var(--fp5-color-primary); }
 .fp5-icon-box.is-glow { box-shadow: var(--fp5-shadow-glow); }
 /* Hover behaviors inherited by parent */
 .fp5-card.is-interactive:hover .fp5-icon-box.is-accent { background-color: var(--fp5-color-accent); color: var(--fp5-text-white); transform: scale(1.1); }
