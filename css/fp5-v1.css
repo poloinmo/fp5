@@ -156,7 +156,7 @@
 .fp5-container.is-narrow { max-width: 800px; }
 .fp5-container.is-xs { max-width: 500px; }
 
-.fp5-section { padding: var(--fp5-space-6) 0; position: relative; }
+.fp5-section { padding: 6.5rem 0; position: relative; }
 .fp5-section.is-divider { border-top: 1px solid var(--fp5-color-border); }
 .fp5-section.is-hero { padding-top: 4rem; padding-bottom: 6rem; }
 .fp5-section.is-alt { background-color: var(--fp5-color-surface-alt); }
