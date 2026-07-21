@@ -471,7 +471,7 @@
 
 @media (min-width: 768px) {
   .fp5-title-xl { font-size: 2.75rem; }
-  .fp5-hero { padding: var(--fp5-space-6) 0; }
+  .fp5-hero { padding: 6.5rem 0; }
     .fp5-calc-form-side { border-bottom: none; border-right: 1px solid var(--fp5-color-border); }
     .fp5-footer { flex-direction: row; justify-content: center; max-width: 600px; margin: 0 auto; gap: 2.5rem; }
     .fp5-footer-content { text-align: left; align-items: flex-start; max-width: none; }
