@@ -83,6 +83,7 @@
 .fp5-text-overline { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: var(--fp5-font-bold); color: var(--fp5-text-soft); display: block; }
 
 /* Typography Modifiers */
+.fp5-texto-destacado { font-weight: var(--fp5-font-bold); color: var(--fp5-text-main); }
 .is-tight { line-height: 1; }
 .fp5-text-center { text-align: center; }
 .fp5-text-left { text-align: left; }
