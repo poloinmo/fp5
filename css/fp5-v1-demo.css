@@ -230,8 +230,8 @@
 
 /* FAQ */
 .fp5-faq-card.is-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-md); border-color: var(--fp5-color-border); }
-.fp5-faq-card.is-active .fp5-btn { color: var(--fp5-color-accent); }
-.fp5-faq-card.is-active .fp5-icon-box { transform: rotate(180deg); color: var(--fp5-color-accent); }
+.fp5-faq-card.is-active .fp5-btn { color: var(--fp5-color-primary); }
+.fp5-faq-card.is-active .fp5-icon-box { transform: rotate(180deg); color: var(--fp5-color-primary); }
 .fp5-faq-content { padding: var(--fp5-space-3) 1.25rem var(--fp5-space-3); }
 
 /* Share Dropdown */
@@ -581,4 +581,4 @@
 .fp5-card.is-interactive.is-scroll-active { transform: translateY(-5px); box-shadow: var(--fp5-shadow-lg); background-color: var(--fp5-color-surface); border-color: var(--fp5-color-border); }
 .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-accent { background-color: rgba(30, 58, 138, 0.1); color: var(--fp5-color-primary); transform: scale(1.1); }
 .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-solid { transform: scale(1.1); }
-.fp5-faq-card.is-scroll-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); border: 1px solid var(--fp5-color-border); border-left: 3px solid var(--fp5-color-primary); }
+.fp5-faq-card.is-scroll-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); border: 1px solid var(--fp5-color-border); }
