@@ -582,3 +582,14 @@
 .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-accent { background-color: rgba(30, 58, 138, 0.1); color: var(--fp5-color-primary); transform: scale(1.1); }
 .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-solid { transform: scale(1.1); }
 .fp5-faq-card.is-scroll-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); border: 1px solid var(--fp5-color-border); }
+
+.u-grid-3-always { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.u-grid-3-always .fp5-card { padding: 0.75rem 0.5rem; }
+.u-grid-3-always .fp5-title-xl { font-size: 1.75rem; line-height: 1; }
+.u-grid-3-always .fp5-title-sm { font-size: 0.75rem; line-height: 1.2; }
+@media (min-width: 768px) {
+  .u-grid-3-always { gap: 1rem; }
+  .u-grid-3-always .fp5-card { padding: 1.5rem; }
+  .u-grid-3-always .fp5-title-xl { font-size: 2.25rem; }
+  .u-grid-3-always .fp5-title-sm { font-size: 0.875rem; }
+}
