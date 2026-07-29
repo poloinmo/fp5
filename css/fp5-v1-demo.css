@@ -593,3 +593,9 @@
   .u-grid-3-always .fp5-title-xl { font-size: 2.25rem; }
   .u-grid-3-always .fp5-title-sm { font-size: 0.875rem; }
 }
+\n
+@media (max-width: 767px) {
+  .fp5-faq-btn { justify-content: center !important; position: relative; padding-left: 2.5rem; padding-right: 2.5rem; }
+  .fp5-faq-btn span { text-align: center; width: 100%; }
+  .fp5-faq-btn .fp5-faq-icon { position: absolute; right: 1rem; }
+}
