@@ -128,7 +128,7 @@
 /* Card Modifiers */
 .fp5-card.is-dark { background-color: var(--fp5-color-primary); backdrop-filter: blur(4px); border-color: var(--fp5-color-border-dark); }
 .fp5-card.is-borderless { border-color: transparent; }
-.fp5-card.is-interactive:hover { transform: translateY(-5px); box-shadow: var(--fp5-shadow-lg); background-color: var(--fp5-color-surface); border-color: var(--fp5-color-border); }
+.fp5-card.is-interactive:hover, .fp5-card.is-interactive.is-scroll-active { transform: translateY(-5px); box-shadow: var(--fp5-shadow-lg); background-color: var(--fp5-color-surface); border-color: var(--fp5-color-border); }
 .fp5-card.is-dark.is-interactive:hover { background-color: var(--fp5-color-primary); border-color: var(--fp5-color-border-dark); color: var(--fp5-text-white); }
 .fp5-card.is-centered { align-items: center; text-align: center; }
 .fp5-card.is-flush { padding: 0; }
@@ -149,8 +149,8 @@
 .fp5-icon-box.is-primary { background-color: var(--fp5-color-primary-light); color: var(--fp5-color-primary); }
 .fp5-icon-box.is-glow { box-shadow: var(--fp5-shadow-glow); }
 /* Hover behaviors inherited by parent */
-.fp5-card.is-interactive:hover .fp5-icon-box.is-accent { background-color: rgba(30, 58, 138, 0.1); color: var(--fp5-color-primary); transform: scale(1.1); }
-.fp5-card.is-interactive:hover .fp5-icon-box.is-solid { transform: scale(1.1); }
+.fp5-card.is-interactive:hover .fp5-icon-box.is-accent, .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-accent { background-color: rgba(30, 58, 138, 0.1); color: var(--fp5-color-primary); transform: scale(1.1); }
+.fp5-card.is-interactive:hover .fp5-icon-box.is-solid, .fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-solid { transform: scale(1.1); }
 
 /* ─── GRID & LAYOUT (Foundation) ─── */
 .fp5-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--fp5-space-4); }
@@ -514,6 +514,7 @@
 .fp5-testim-avatar { background: linear-gradient(135deg, var(--fp5-color-primary), var(--fp5-color-primary)); color: white; }
 
 .fp5-faq-card { transition: background-color 0.3s, box-shadow 0.3s; border: 1px solid var(--fp5-color-border); }
+.fp5-faq-card:hover, .fp5-faq-card.is-scroll-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); }
 .fp5-faq-card.is-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); border-left: 1px solid var(--fp5-color-border); }
 .fp5-faq-icon { transition: transform 0.3s ease; }
 .is-active .fp5-faq-icon { transform: rotate(180deg); color: var(--fp5-color-primary); }
@@ -575,3 +576,9 @@
 .u-gap-4 { gap: var(--fp5-space-4); }
 .u-text-primary { color: var(--fp5-color-primary); }
 .u-footer-actions { justify-content: center; width: 100%; }
+
+/* ─── SCROLL SENSOR EFECTOS RECUPERADOS ─── */
+.fp5-card.is-interactive.is-scroll-active { transform: translateY(-5px); box-shadow: var(--fp5-shadow-lg); background-color: var(--fp5-color-surface); border-color: var(--fp5-color-border); }
+.fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-accent { background-color: rgba(30, 58, 138, 0.1); color: var(--fp5-color-primary); transform: scale(1.1); }
+.fp5-card.is-interactive.is-scroll-active .fp5-icon-box.is-solid { transform: scale(1.1); }
+.fp5-faq-card.is-scroll-active { background-color: var(--fp5-color-surface); box-shadow: var(--fp5-shadow-sm); border: 1px solid var(--fp5-color-border); border-left: 3px solid var(--fp5-color-primary); }
