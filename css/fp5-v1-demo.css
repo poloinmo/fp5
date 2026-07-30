@@ -581,3 +581,11 @@
 }
 
 .fp5-max-w-none { max-width: none !important; }
+\n
+/* Margenes laterales para escritorio (alineado a Experiencias Compartidas) */
+@media (min-width: 768px) {
+  #faq, #como-trabajo {
+    padding-left: var(--fp5-space-5);
+    padding-right: var(--fp5-space-5);
+  }
+}
