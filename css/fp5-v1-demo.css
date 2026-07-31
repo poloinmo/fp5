@@ -590,3 +590,8 @@
     padding-right: var(--fp5-space-5);
   }
 }
+
+
+@media (max-width: 767px) {
+  .u-text-center-mobile { text-align: center !important; }
+}
