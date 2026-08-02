@@ -530,7 +530,7 @@
 .u-grid-align-start { align-items: start; }
 .u-flex-col-full { display: flex; flex-direction: column; height: 100%; }
 .u-text-light { color: var(--fp5-text-light); }
-.u-watermark-icon-wrap { flex-grow: 1; display: flex; align-items: center; justify-content: center; opacity: 0.06; color: var(--fp5-color-primary); padding-top: 2rem; }
+.u-watermark-icon-wrap { flex-grow: 1; min-height: 0; display: flex; align-items: center; justify-content: center; opacity: 0.06; color: var(--fp5-color-primary); }
 .u-watermark-icon { font-size: 14rem; }
 .u-text-bold-main { font-weight: var(--fp5-font-bold); color: var(--fp5-text-main); }
 .u-profile-img { width: 100%; max-width: 320px; border-radius: var(--fp5-radius-md); box-shadow: var(--fp5-shadow-lg); object-fit: cover; aspect-ratio: 1/1; }
