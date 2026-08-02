@@ -580,3 +580,8 @@
 @media (max-width: 767px) {
   .u-text-center-mobile { text-align: center !important; }
 }
+
+
+/* Added for SVG watermark */
+.u-watermark-icon-svg { height: 100%; width: auto; max-height: 16rem; fill: currentColor; }
+.u-flex-center-y { display: flex; flex-direction: column; justify-content: center; height: 100%; }
