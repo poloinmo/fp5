@@ -585,3 +585,7 @@
 /* Added for SVG watermark */
 .u-watermark-icon-svg { height: 100%; width: auto; max-height: 16rem; fill: currentColor; }
 .u-flex-center-y { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+
+/* Top spacing for properties page */
+.fp5-property-top-spacing { padding-top: var(--fp5-space-4); }
+@media (min-width: 992px) { .fp5-property-top-spacing { padding-top: 3rem; } }
