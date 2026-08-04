@@ -211,13 +211,14 @@
 
 /* Forms */
 .fp5-input-wrapper { position: relative; width: 100%; display: flex; flex-direction: column; }
-.fp5-input { width: 100%; background-color: var(--fp5-color-surface); border: 1px solid var(--fp5-color-border); color: var(--fp5-text-main); padding: 0.625rem 0.75rem; border-radius: var(--fp5-radius-sm); font-size: 1rem; height: 3rem; box-sizing: border-box; line-height: 1.5; outline: none; transition: border-color 0.2s; font-family: inherit; z-index: var(--fp5-z-base); position: relative; }
-.fp5-input:focus { border-color: var(--fp5-color-accent); box-shadow: 0 0 0 1px var(--fp5-color-accent); }
+.fp5-input { width: 100%; background-color: var(--fp5-color-surface); border: 1px solid var(--fp5-color-border); color: var(--fp5-text-main); padding: 0.625rem 0.75rem; border-radius:  4px; font-size: 1rem; height: 3rem; box-sizing: border-box; line-height: 1.5; outline: none; transition: border-color 0.2s; font-family: inherit; z-index: var(--fp5-z-base); position: relative; }
+.fp5-input:focus { border-color: var(--fp5-color-accent); border-width: 2px; }
 .fp5-floating-label { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--fp5-text-light); font-size: 1rem; pointer-events: none; transition: var(--fp5-transition); transform-origin: left top; padding: 0 0.25rem; background-color: transparent; margin: 0; line-height: 1; z-index: var(--fp5-z-overlay); }
 .fp5-input:focus ~ .fp5-floating-label, input.fp5-input:not(:placeholder-shown) ~ .fp5-floating-label, textarea.fp5-input:not(:placeholder-shown) ~ .fp5-floating-label, .fp5-select.has-value ~ .fp5-floating-label { top: 0; transform: translateY(-50%) scale(0.85); color: var(--fp5-text-light); background-color: var(--fp5-color-surface); }
 .fp5-input:focus ~ .fp5-floating-label { color: var(--fp5-color-accent); }
-.fp5-select { appearance: none !important; -webkit-appearance: none !important; background-image: none !important; cursor: pointer; padding: 0.625rem 0.75rem; height: 3rem; font-family: inherit; font-size: 1rem; line-height: 1.5; border: 1px solid var(--fp5-color-border); border-radius: var(--fp5-radius-sm); }
+.fp5-select { appearance: none !important; -webkit-appearance: none !important; background-image: none !important; cursor: pointer; padding: 0.625rem 0.75rem; height: 3rem; font-family: inherit; font-size: 1rem; line-height: 1.5; border: 1px solid var(--fp5-color-border); border-radius:  4px; }
 .fp5-select:invalid { color: transparent !important; }
+.fp5-select:focus { border-color: var(--fp5-color-accent); border-width: 2px; }
 .fp5-select.is-focused, .fp5-select.has-value { color: var(--fp5-text-main) !important; }
 
 /* ─── PRICING (Unified System) ─── */
