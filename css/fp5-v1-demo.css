@@ -188,6 +188,7 @@
 }
 @media (min-width: 1024px) {
   .fp5-cards-grid   { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .fp5-cards-grid.is-small-cells { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
   .fp5-pricing-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
   .fp5-specs-grid   { grid-template-columns: repeat(6, 1fr); }
 }
