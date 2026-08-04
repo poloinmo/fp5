@@ -110,6 +110,7 @@
 .fp5-btn.is-outline:hover { color: var(--fp5-color-accent); border-color: var(--fp5-color-accent); }
 .fp5-btn.is-whatsapp { background-color: #ffffff; border-color: #16a34a; color: #16a34a; box-shadow: var(--fp5-shadow-sm); border-radius: 9999px; }
 .fp5-btn.is-whatsapp:hover { color: var(--fp5-color-accent); border-color: var(--fp5-color-accent); }
+.fp5-btn.is-centered { width: fit-content; margin-left: auto; margin-right: auto; }
 .fp5-btn.is-primary { background-color: var(--fp5-color-primary); border-color: var(--fp5-color-accent); color: var(--fp5-text-white); box-shadow: var(--fp5-shadow-md); }
 .fp5-btn.is-primary:hover { background-color: var(--fp5-color-primary); border-color: var(--fp5-color-primary); color: var(--fp5-text-white); }
 .fp5-btn.is-ghost { border-color: transparent; background: transparent; }
@@ -262,6 +263,7 @@
 
 .fp5-m-0 { margin: 0 !important; }
 .fp5-mt-0 { margin-top: 0 !important; }
+.fp5-mt-2 { margin-top: var(--fp5-space-2) !important; }
 .fp5-mt-3 { margin-top: var(--fp5-space-3) !important; }
 .fp5-mt-4 { margin-top: var(--fp5-space-4) !important; }
 .fp5-mt-5 { margin-top: 2rem !important; }
