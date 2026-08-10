@@ -195,7 +195,7 @@
 @media (max-width: 767px) {
   .fp5-cards-grid.is-mobile-2 { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
   .fp5-cards-grid.is-mobile-2 .fp5-card { padding: 0.75rem; }
-  .fp5-specs-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .fp5-specs-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
 }
 
 .fp5-flex { display: flex; }
@@ -497,7 +497,8 @@
   section.fp5-hero { display: flex !important; }
   .polo-ti-page { padding-left: 0.8rem !important; padding-right: 0.8rem !important; }
   .ficha-multimedia-select { gap: 0.25rem; }
-    .polo-ti-page .ficha-multimedia-item, .fp5-header-flex { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .fp5-header-flex { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .ficha-multimedia-item i, .ficha-multimedia-item-disabled i { font-size: 24px !important; width: auto !important; height: auto !important; align-self: center; }
     .fp5-price-container { align-items: flex-start; }
   .fp5-feature-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     .polo-ti-page .fp5-feature-item .fp5-icon-box { width: 2.5rem; height: 2.5rem; font-size: 1.25rem; margin: 0 auto 0.5rem auto; }
