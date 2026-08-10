@@ -195,7 +195,7 @@
 @media (max-width: 767px) {
   .fp5-cards-grid.is-mobile-2 { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
   .fp5-cards-grid.is-mobile-2 .fp5-card { padding: 0.75rem; }
-  .fp5-specs-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .fp5-specs-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
 }
 
 .fp5-flex { display: flex; }
