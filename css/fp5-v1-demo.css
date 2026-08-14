@@ -536,8 +536,6 @@
 .u-list-item.is-last { border-bottom: none; padding-top: var(--fp5-space-3); padding-bottom: 0; }
 .u-list-icon { color: var(--fp5-color-primary); font-size: 1.25rem; flex-shrink: 0; }
 .u-list-text { color: var(--fp5-text-main); font-weight: 500; margin: 0; }
-.u-signature-wrap { margin-top: 2rem; text-align: right; }
-.u-signature { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--fp5-color-primary); line-height: 1; transform: rotate(-5deg); display: inline-block; }
 .u-gap-4 { gap: var(--fp5-space-4); }
 .u-text-primary { color: var(--fp5-color-primary); }
 .u-footer-actions { justify-content: center; width: 100%; }
@@ -610,6 +608,35 @@
   position: absolute;
   width: 18px;
   height: 18px;
+  border-radius: 50%;
+  background-color: #AB0030;
+  bottom: 18%;
+  right: 20%;
+}
+
+.fp-isotype-container-small {
+  width: 100%;
+  max-width: 80px;
+  aspect-ratio: 1/1;
+  background-color: #16202a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 35px;
+  letter-spacing: -1px;
+  position: relative;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-radius: 50%;
+  margin: 0;
+  overflow: hidden;
+  opacity: 1;
+}
+.fp-isotype-container-small .fp-isotype-dot-small {
+  position: absolute;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background-color: #AB0030;
   bottom: 18%;
