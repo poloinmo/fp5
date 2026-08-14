@@ -135,9 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('fp5-mobile-hover');
+          entry.target.classList.add('fp5-mobile-hover', 'is-scroll-active');
         } else {
-          entry.target.classList.remove('fp5-mobile-hover');
+          entry.target.classList.remove('fp5-mobile-hover', 'is-scroll-active');
         }
       });
     }, { rootMargin: '-30% 0px -30% 0px' });
