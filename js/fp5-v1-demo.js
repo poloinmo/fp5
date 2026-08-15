@@ -131,18 +131,17 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof AOS !== 'undefined') AOS.init({ duration: 700, once: true, offset: 80 });
 
   // Mobile Scroll Hover Effect
-  if (window.matchMedia('(hover: none)').matches || window.matchMedia('(max-width: 768px)').matches) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fp5-mobile-hover', 'is-scroll-active');
-        } else {
-          entry.target.classList.remove('fp5-mobile-hover', 'is-scroll-active');
-        }
-      });
-    }, { rootMargin: '-30% 0px -30% 0px' });
-    document.querySelectorAll('.is-interactive').forEach(card => observer.observe(card));
-  }
+    const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fp5-mobile-hover', 'is-scroll-active');
+      } else {
+        entry.target.classList.remove('fp5-mobile-hover', 'is-scroll-active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  
+  document.querySelectorAll('.is-interactive').forEach(card => scrollObserver.observe(card));
 
   
   // Counter Up Logic
@@ -291,3 +290,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   observer.observe(sidebar, { childList: true, subtree: true });
 })();
+
+
