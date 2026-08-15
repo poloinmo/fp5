@@ -268,15 +268,62 @@ document.addEventListener('DOMContentLoaded', function() {
     var wspBtn = sidebar.querySelector('.fp5-dyn-wsp');
     if (wspBtn) {
       wspBtn.replaceWith(wspBtn.cloneNode(true));
-      var newBtn = sidebar.querySelector('.fp5-dyn-wsp');
+            var newBtn = sidebar.querySelector('.fp5-dyn-wsp');
       if (newBtn) {
         newBtn.addEventListener('click', function(e) {
+          // Obtener mensaje predeterminado buscando enlaces de WhatsApp en la pagina
+          var defaultMsg = 'Hola Facundo, quiero hacerte una consulta.';
+          var wspLinks = document.querySelectorAll('a[href*="wa.me"]');
+          for (var i = 0; i < wspLinks.length; i++) {
+            if (wspLinks[i].href.includes('text=')) {
+              try {
+                var urlObj = new URL(wspLinks[i].href);
+                var textParam = urlObj.searchParams.get('text');
+                if (textParam) {
+                  defaultMsg = textParam;
+                  break;
+                }
+              } catch (err) {}
+            }
+          }
+          // Tambien buscar en botones con onclick
+          if (defaultMsg === 'Hola Facundo, quiero hacerte una consulta.') {
+             var wspBtns = document.querySelectorAll('button[onclick*="wa.me"]');
+             if (wspBtns.length > 0) {
+               var match = wspBtns[0].getAttribute('onclick').match(/text=([^&']+)/);
+               if (match && match[1]) {
+                 defaultMsg = decodeURIComponent(match[1]);
+               }
+             }
+          }
+
           var nombreEl = sidebar.querySelector('input[name="NOMBRE"]');
+          var emailEl = sidebar.querySelector('input[name="EMAIL"]');
+          var telEl = sidebar.querySelector('input[name="TELEFONO"]');
+          var msgEl = sidebar.querySelector('textarea[name="MENSAJE"]');
+
           var nombre = nombreEl ? nombreEl.value.trim() : '';
-          var msg = 'Hola Facundo, quiero consultar por una tasación de mi propiedad.';
-          if (nombre) msg = 'Hola Facundo, soy ' + nombre + ' y quiero consultar por una tasación de mi propiedad.';
+          var email = emailEl ? emailEl.value.trim() : '';
+          var tel = telEl ? telEl.value.trim() : '';
+          var userMsg = msgEl ? msgEl.value.trim() : '';
+
+          var finalMsg = defaultMsg;
+          if (nombre) {
+            finalMsg = finalMsg.replace('Hola Facundo,', 'Hola Facundo, soy ' + nombre + ' y');
+          }
+
+          if (userMsg) {
+             finalMsg += '\n\nTe escribo para dejarte este mensaje:\n"' + userMsg + '"';
+          }
+
+          if (tel || email) {
+            finalMsg += '\n\nMis datos de contacto son:';
+            if (tel) finalMsg += '\nTel: ' + tel;
+            if (email) finalMsg += '\nEmail: ' + email;
+          }
+
           var base = 'https://wa.me/5493416761176';
-          this.href = base + '?text=' + encodeURIComponent(msg);
+          this.href = base + '?text=' + encodeURIComponent(finalMsg);
         });
       }
     }
