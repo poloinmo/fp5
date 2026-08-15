@@ -144,6 +144,36 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.is-interactive').forEach(card => observer.observe(card));
   }
 
+  
+  // Counter Up Logic
+  const counters = document.querySelectorAll('.fp5-counter');
+  if (counters.length > 0) {
+    const speed = 60; // Make it faster
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const increment = target / speed;
+          
+          const updateCount = () => {
+            const count = +counter.innerText;
+            if (count < target) {
+              counter.innerText = Math.ceil(count + increment);
+              setTimeout(updateCount, 25);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    counters.forEach(counter => counterObserver.observe(counter));
+  }
+
   // Calculadora - Escala no lineal para M²
   const m2Slider = document.getElementById('calc-m2');
   const m2Number = document.getElementById('val-m2-input');
