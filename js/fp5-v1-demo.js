@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
   
-  document.querySelectorAll('.is-interactive').forEach(card => scrollObserver.observe(card));
+  document.querySelectorAll('.is-interactive, .fp5-faq-card').forEach(card => scrollObserver.observe(card));
 
   
   // Counter Up Logic
