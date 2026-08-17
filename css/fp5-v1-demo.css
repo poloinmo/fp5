@@ -100,7 +100,7 @@
 .fp5-btn { 
   display: inline-flex; align-items: center; justify-content: center; gap: var(--fp5-space-2); 
   padding: 0.625rem 1.25rem; border-radius: var(--fp5-radius-full); 
-  font-size: 0.875rem; font-weight: var(--fp5-font-bold); font-family: inherit; 
+  font-size: 1rem; font-weight: var(--fp5-font-bold); font-family: inherit; 
   cursor: pointer; transition: var(--fp5-transition); text-decoration: none; 
   border: 1.5px solid transparent; outline: none; background: transparent; color: var(--fp5-text-main);
 }
