@@ -646,7 +646,7 @@
 /* Brand Logo Classes */
 .fp5-brand-banner { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; font-size: 2rem; }
 .fp5-logo-text { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 90%; }
-.fp5-logo-dot { font-family: "Libre Baskerville", serif; font-size: 1.1em; color: var(--fp5-color-primary); }
+.fp5-logo-dot { font-family: "Libre Baskerville", serif; font-size: 1.1em; color: var(--fp5-color-accent); }
 .fp5-logo-ext { font-weight: 500; color: #607080; font-size: 0.7em; }
 .fp5-logo-text-footer { line-height: 1; }
 
