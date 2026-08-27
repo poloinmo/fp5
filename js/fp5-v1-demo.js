@@ -394,7 +394,7 @@ window.initDynamicForms = function() {
       } else if (type === 'contacto-propiedad') {
         container.innerHTML = 
           '<div class="fp2-sidebar-header" style="margin-bottom: 0.75rem; padding-bottom: 0.5rem;">' +
-          '  <h3 class="fp2-sidebar-title">¿Necesitas más información?</h3>' +
+          '  <h3 class="fp2-sidebar-title" style="text-align: center;">¿Más información?</h3>' +
           '</div>' +
           '<form class="fp2-form fp-dynamic-brevo-form" data-type="propiedad" style="gap: 1rem; margin-top: 0;">' +
           '  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">' +
@@ -416,8 +416,8 @@ window.initDynamicForms = function() {
           '    <label class="fp2-floating-label">Mensaje *</label>' +
           '  </div>' +
           '  <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-top: -0.25rem;">' +
-          '    <input type="checkbox" id="fp-dyn-terms" name="TERMINOS" required="required" class="fp-dyn-input" style="margin-top: 0.25rem; accent-color: var(--fp5-color-accent);" />' +
-          '    <label for="fp-dyn-terms" style="font-size: 0.75rem; color: var(--fp2-color-text-muted); line-height: 1.4; user-select: none; cursor: pointer;">Acepto Términos y Condiciones de Uso y la Política de Privacidad</label>' +
+          '    <input type="checkbox" id="fp-dyn-terms" name="TERMINOS" required="required" checked="checked" class="fp-dyn-input" style="margin-top: 0.25rem; accent-color: var(--fp5-color-accent);" />' +
+          '    <label for="fp-dyn-terms" style="font-size: 0.75rem; color: var(--fp2-color-text-muted); line-height: 1.4; user-select: none; cursor: pointer;">Acepto los <a href="https://foro-inmobiliario.blogspot.com/2025/01/terminos-y-condiciones-de-uso.html" target="_blank" style="color: inherit; text-decoration: underline;">TǸrminos y Condiciones de Uso</a> y las <a href="https://www.facundopolo.com/2025/01/politicas-de-proteccion-de-datos.html" target="_blank" style="color: inherit; text-decoration: underline;">Polticas de Privacidad</a></label>' +
           '  </div>' +
           '  <div class="fp-dyn-err-msg fp2-error-msg" style="position:relative; text-align:left; margin-top:0.25rem;">* Verifica los campos obligatorios.</div>' +
           '  <button type="submit" class="fp5-btn is-outline is-block fp-dyn-submit fp5-mt-2">' +
@@ -454,14 +454,59 @@ window.initDynamicForms = function() {
 
         if (wspBtn) {
           wspBtn.addEventListener('click', function(e) {
+              if (form) {
+                inputs.forEach(function(i) { i.classList.add('touched'); });
+                if (!form.checkValidity()) {
+                  e.preventDefault();
+                  checkValidity();
+                  return;
+                }
+              }
+              var nombreEl = form ? form.querySelector('input[name="NOMBRE"]') : null;
+            var emailEl = form ? form.querySelector('input[name="EMAIL"]') : null;
+            var telEl = form ? form.querySelector('input[name="TELEFONO"]') : null;
+            var msgEl = form ? form.querySelector('textarea[name="MENSAJE"]') : null;
+
+            var nombre = nombreEl ? nombreEl.value.trim() : '';
+            var email = emailEl ? emailEl.value.trim() : '';
+            var tel = telEl ? telEl.value.trim() : '';
+            var userMsg = msgEl ? msgEl.value.trim() : '';
+
+            var finalMsg = msgText;
+            if (nombre) {
+              finalMsg = finalMsg.replace('Hola Facundo,', 'Hola Facundo, soy ' + nombre + ' y');
+            }
+
+            if (userMsg && userMsg !== (msgText + '.') && userMsg !== msgText && userMsg !== 'Hola Facundo, quiero hacerte una consulta.') {
+               finalMsg += '\n\nTe escribo para dejarte este mensaje:\n"' + userMsg + '"';
+            }
+
+            if (tel || email) {
+              finalMsg += '\n\nMis datos de contacto son:';
+              if (tel) finalMsg += '\nTel: ' + tel;
+              if (email) finalMsg += '\nEmail: ' + email;
+            }
+
             var base = this.href.split('?')[0];
-            this.href = base + '?text=' + encodeURIComponent(msgText);
+            this.href = base + '?text=' + encodeURIComponent(finalMsg);
           });
         }
       }
 
       if (!form) return;
-      var inputs = form.querySelectorAll('input, textarea');
+        var nameInput = form.querySelector('input[name="NOMBRE"]');
+        if (nameInput) {
+          nameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[0-9]/g, '');
+          });
+        }
+        var telInput = form.querySelector('input[name="TELEFONO"]');
+        if (telInput) {
+          telInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9\+\s\-]/g, '');
+          });
+        }
+        var inputs = form.querySelectorAll('input, textarea');
       var submitBtn = form.querySelector('.fp-dyn-submit');
       var errMsg = container.querySelector('.fp-dyn-err-msg');
       var okBox = container.querySelector('.fp-dyn-ok');
