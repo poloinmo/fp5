@@ -349,7 +349,7 @@ window.initDynamicForms = function() {
         var cEl = document.getElementById('fp2-code-display') || document.getElementById('fp5-code-display');
         var t = tEl ? tEl.innerText.trim() : '';
         var c = cEl ? cEl.innerText.trim() : '';
-        var msgText = c ? ('Hola Facundo, quiero consultar por la propiedad: ' + t + ' (' + c + ')') : 'Hola Facundo, quiero hacerte una consulta.';
+        var msgText = c ? ('Hola Facundo, te consulto por la propiedad: ' + t + ' (' + c + ')') : 'Hola Facundo, tengo una consulta.';
           
           if (type === 'contacto-propiedad') {
             var ta = container.querySelector('textarea[name="MENSAJE"]');
