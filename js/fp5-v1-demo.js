@@ -342,6 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ============================================================================ */
+
+
+/* ============================================================================ */
 /* MEJORAS CENTRALIZADAS (Agregadas desde la plantilla XML) */
 /* ============================================================================ */
 
@@ -391,7 +394,7 @@ window.initDynamicForms = function() {
       } else if (type === 'contacto-propiedad') {
         container.innerHTML = 
           '<div class="fp2-sidebar-header" style="margin-bottom: 0.75rem; padding-bottom: 0.5rem;">' +
-          '  <h3 class="fp2-sidebar-title" style="text-align: center;">¿Más información?</h3>' +
+          '  <h3 class="fp2-sidebar-title">¿Necesitas más información?</h3>' +
           '</div>' +
           '<form class="fp2-form fp-dynamic-brevo-form" data-type="propiedad" style="gap: 1rem; margin-top: 0;">' +
           '  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">' +
@@ -413,8 +416,8 @@ window.initDynamicForms = function() {
           '    <label class="fp2-floating-label">Mensaje *</label>' +
           '  </div>' +
           '  <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-top: -0.25rem;">' +
-          '    <input type="checkbox" id="fp-dyn-terms" name="TERMINOS" required="required" checked="checked" class="fp-dyn-input" style="margin-top: 0.25rem; accent-color: var(--fp5-color-accent);" />' +
-          '    <label for="fp-dyn-terms" style="font-size: 0.75rem; color: var(--fp2-color-text-muted); line-height: 1.4; user-select: none; cursor: pointer;">Acepto los <a href="https://foro-inmobiliario.blogspot.com/2025/01/terminos-y-condiciones-de-uso.html" target="_blank" style="color: inherit; text-decoration: underline;">Términos y Condiciones de Uso</a> y las <a href="https://www.facundopolo.com/2025/01/politicas-de-proteccion-de-datos.html" target="_blank" style="color: inherit; text-decoration: underline;">Políticas de Privacidad</a></label>' +
+          '    <input type="checkbox" id="fp-dyn-terms" name="TERMINOS" required="required" class="fp-dyn-input" style="margin-top: 0.25rem; accent-color: var(--fp5-color-accent);" />' +
+          '    <label for="fp-dyn-terms" style="font-size: 0.75rem; color: var(--fp2-color-text-muted); line-height: 1.4; user-select: none; cursor: pointer;">Acepto Términos y Condiciones de Uso y la Política de Privacidad</label>' +
           '  </div>' +
           '  <div class="fp-dyn-err-msg fp2-error-msg" style="position:relative; text-align:left; margin-top:0.25rem;">* Verifica los campos obligatorios.</div>' +
           '  <button type="submit" class="fp5-btn is-outline is-block fp-dyn-submit fp5-mt-2">' +
@@ -451,59 +454,14 @@ window.initDynamicForms = function() {
 
         if (wspBtn) {
           wspBtn.addEventListener('click', function(e) {
-              if (form) {
-                inputs.forEach(function(i) { i.classList.add('touched'); });
-                if (!form.checkValidity()) {
-                  e.preventDefault();
-                  checkValidity();
-                  return;
-                }
-              }
-              var nombreEl = form ? form.querySelector('input[name="NOMBRE"]') : null;
-            var emailEl = form ? form.querySelector('input[name="EMAIL"]') : null;
-            var telEl = form ? form.querySelector('input[name="TELEFONO"]') : null;
-            var msgEl = form ? form.querySelector('textarea[name="MENSAJE"]') : null;
-
-            var nombre = nombreEl ? nombreEl.value.trim() : '';
-            var email = emailEl ? emailEl.value.trim() : '';
-            var tel = telEl ? telEl.value.trim() : '';
-            var userMsg = msgEl ? msgEl.value.trim() : '';
-
-            var finalMsg = msgText;
-            if (nombre) {
-              finalMsg = finalMsg.replace('Hola Facundo,', 'Hola Facundo, soy ' + nombre + ' y');
-            }
-
-            if (userMsg && userMsg !== (msgText + '.') && userMsg !== msgText && userMsg !== 'Hola Facundo, quiero hacerte una consulta.') {
-               finalMsg += '\n\nTe escribo para dejarte este mensaje:\n"' + userMsg + '"';
-            }
-
-            if (tel || email) {
-              finalMsg += '\n\nMis datos de contacto son:';
-              if (tel) finalMsg += '\nTel: ' + tel;
-              if (email) finalMsg += '\nEmail: ' + email;
-            }
-
             var base = this.href.split('?')[0];
-            this.href = base + '?text=' + encodeURIComponent(finalMsg);
+            this.href = base + '?text=' + encodeURIComponent(msgText);
           });
         }
       }
 
       if (!form) return;
-        var nameInput = form.querySelector('input[name="NOMBRE"]');
-        if (nameInput) {
-          nameInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[0-9]/g, '');
-          });
-        }
-        var telInput = form.querySelector('input[name="TELEFONO"]');
-        if (telInput) {
-          telInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9\+\s\-]/g, '');
-          });
-        }
-        var inputs = form.querySelectorAll('input, textarea');
+      var inputs = form.querySelectorAll('input, textarea');
       var submitBtn = form.querySelector('.fp-dyn-submit');
       var errMsg = container.querySelector('.fp-dyn-err-msg');
       var okBox = container.querySelector('.fp-dyn-ok');
@@ -771,8 +729,107 @@ window.initDynamicForms = function() {
       return parseFloat(stripped.replace(',', '.'));
     };
 
+    var formatMoney = function(num) {
+      return '$' + num.toLocaleString('es-AR', {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    };
+
+    var updateVariation = function(varId, oldVal, newVal) {
+      var varEl = document.getElementById(varId);
+      if (!varEl) return;
+      var diff = newVal - oldVal;
+      var perc = oldVal > 0 ? Math.abs((diff / oldVal) * 100) : 0;
+      var percStr = perc.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '%';
+      
+      if (diff > 0) {
+        varEl.innerHTML = "<span class='text-green-500 text-[10px]'>&#9650;</span> <span class='font-[Roboto,sans-serif] font-bold text-[#1f1f1f] text-[12px] leading-[12px]'>" + percStr + "</span> <span class='font-[Roboto,sans-serif] font-light text-[#555555] text-[12px] leading-[12px]'>Últimas 24 hs</span>";
+      } else if (diff < 0) {
+        varEl.innerHTML = "<span class='text-red-500 text-[10px]'>&#9660;</span> <span class='font-[Roboto,sans-serif] font-bold text-[#1f1f1f] text-[12px] leading-[12px]'>" + percStr + "</span> <span class='font-[Roboto,sans-serif] font-light text-[#555555] text-[12px] leading-[12px]'>Últimas 24 hs</span>";
+      } else {
+        varEl.innerHTML = "<span class='font-[Roboto,sans-serif] font-bold text-[#1f1f1f] text-[12px] leading-[12px]'>= 0,00%</span> <span class='font-[Roboto,sans-serif] font-light text-[#555555] text-[12px] leading-[12px]'>Últimas 24 hs</span>";
+      }
+    };
+
+    fetch('https://dolarapi.com/v1/dolares')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var getPeriodId = function() {
+          var now = new Date();
+          var d = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
+          var day = d.getDay();
+          if (now.getHours() < 10) {
+             d.setDate(d.getDate() - 1);
+             day = d.getDay();
+          }
+          if (day === 0) d.setDate(d.getDate() - 2);
+          else if (day === 6) d.setDate(d.getDate() - 1);
+          return d.toISOString();
+        };
+        var today = getPeriodId();
+        var mem = { baseDate: today, baseOficial: 0, baseBlue: 0, lastOficial: 0, lastBlue: 0 };
+        try { 
+          var parsed = JSON.parse(localStorage.getItem('fp_dolar_mem'));
+          if (parsed) mem = parsed;
+        } catch(e) {}
+
+        var htmlOficial = parseFloat(valOficialEl.innerText.replace(/\./g, '').replace(',', '.').replace(/[^0-9.-]/g, '')) || 0;
+        var htmlBlue = parseFloat(valBlueEl.innerText.replace(/\./g, '').replace(',', '.').replace(/[^0-9.-]/g, '')) || 0;
+
+        if (mem.baseOficial === 0) mem.baseOficial = htmlOficial;
+        if (mem.baseBlue === 0) mem.baseBlue = htmlBlue;
+
+        if (mem.baseDate !== today) {
+           mem.baseDate = today;
+           mem.baseOficial = mem.lastOficial > 0 ? mem.lastOficial : htmlOficial;
+           mem.baseBlue = mem.lastBlue > 0 ? mem.lastBlue : htmlBlue;
+        }
+
+        data.forEach(function(d) {
+          if (d.casa === 'oficial' && valOficialEl) {
+            valOficialEl.innerText = formatMoney(d.venta);
+            updateVariation('var-dolar-oficial', mem.baseOficial, d.venta);
+            mem.lastOficial = d.venta;
+          }
+          if (d.casa === 'blue' && valBlueEl) {
+            valBlueEl.innerText = formatMoney(d.venta);
+            updateVariation('var-dolar-blue', mem.baseBlue, d.venta);
+            mem.lastBlue = d.venta;
+          }
+          if (d.casa === 'tarjeta') {
+            var el = document.getElementById('val-dolar-tarjeta');
+            if (el) el.innerText = formatMoney(d.venta);
+          }
+          if (d.casa === 'bolsa') {
+            var el = document.getElementById('val-dolar-mep');
+            if (el) el.innerText = formatMoney(d.venta);
+          }
+          if (d.casa === 'contadoconliqui') {
+            var el = document.getElementById('val-dolar-ccl');
+            if (el) el.innerText = formatMoney(d.venta);
+          }
+        });
+        
+        try { localStorage.setItem('fp_dolar_mem', JSON.stringify(mem)); } catch(e) {}
+      })
+      .catch(function(e) { console.error('Error fetching dolar api:', e); });
+  
+};
+
 document.addEventListener("DOMContentLoaded", function() {
-  if (typeof window.initDynamicForms === "function") {
-    window.initDynamicForms();
-  }
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fp5-mobile-hover', 'is-scroll-active');
+        } else {
+          entry.target.classList.remove('fp5-mobile-hover', 'is-scroll-active');
+        }
+      });
+    }, { rootMargin: '-50% 0px -49% 0px' });
+    document.querySelectorAll('.fp5-card.is-interactive, .fp5-faq-card, .fp2-cell').forEach(el => {
+      scrollObserver.observe(el);
+    });
+
+  if (typeof window.initDynamicForms === "function") window.initDynamicForms();
+  if (typeof window.initPropertyLogic === "function") window.initPropertyLogic();
+  if (typeof window.initFinancials === "function") window.initFinancials();
 });
