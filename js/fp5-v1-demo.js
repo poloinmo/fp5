@@ -60,64 +60,7 @@ window.SeleccionarTab = function(tabId, vpId) {
         }
         
         function runBlock() {
-          initSelect();
-          var grid = document.querySelector('.editorial-grid-container');
-          if(!grid) {
-            setTimeout(runBlock, 500);
-            return;
-          }
-          if(grid.querySelector('.fp-cat3-outer.fp2-custom')) return;
-          
-          var outer = document.createElement('div');
-          outer.className = 'fp-cat3-outer fp2-custom';
-          var inner = document.createElement('div');
-          inner.className = 'fp-cat3-grid';
-          outer.appendChild(inner);
-          grid.appendChild(outer);
-
-          function esc3(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-          function getLink3(e){var l='#';(e.link||[]).forEach(function(lk){if(lk.rel==='alternate')l=lk.href;});return l;}
-          function getImg3(e,w,h){
-            if(e.media$thumbnail&&e.media$thumbnail.url) return e.media$thumbnail.url.replace('/s72-c/','/w'+w+'-h'+h+'-c/');
-            var c=e.content?e.content.$t:'';
-            var m=c?c.match(/src="([^"]+\.(jpg|jpeg|png|webp)[^"]*)"/):null;
-            return m?m[1]:'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w='+w+'&h='+h+'&q=80';
-          }
-
-          var cols = [
-            { name: 'Propietarios', label: '.Propietarios' },
-            { name: 'Inversores', label: '.Inversores' },
-            { name: 'Mercado', label: '.Mercado' }
-          ];
-
-          cols.forEach(function(col){
-            var colEl = document.createElement('div');
-            colEl.className = 'fp-cat3-col';
-            colEl.innerHTML = '<div class="fp-cat3-col-header"><h5 class="fp-cat3-col-title">'+esc3(col.name)+'</h5></div><div class="fp-cat3-col-body"><span class="fp5-footer-loading">Cargando...</span></div>';
-            inner.appendChild(colEl);
-            var body = colEl.querySelector('.fp-cat3-col-body');
-            fetch('/feeds/posts/default/-/'+encodeURIComponent(col.label)+'?alt=json&max-results=10&orderby=published')
-              .then(function(r){return r.json();})
-              .then(function(data){
-                var entries=(data.feed&&data.feed.entry)||[];
-                if(!entries.length){body.innerHTML='<span class="fp5-footer-loading">Sin publicaciones.</span>';return;}
-                entries=entries.filter(function(e){return e.title&&e.title.$t&&e.title.$t.trim();}).slice(0,5);
-                if(!entries.length){body.innerHTML='<span class="fp5-footer-loading">Sin publicaciones.</span>';return;}
-                var featured=entries[0];
-                var html='<a href="'+esc3(getLink3(featured))+'" class="fp-cat3-featured">'
-                  +'<div class="fp-cat3-img-wrap"><img src="'+esc3(getImg3(featured,400,300))+'" alt="'+esc3(featured.title.$t)+'" class="fp-cat3-featured-img" /><div class="fp-cat3-featured-overlay"><h6 class="fp-cat3-featured-title">'+esc3(featured.title.$t)+'</h6></div></div>'
-                  +'</a>';
-                html+='<div class="fp-cat3-list">';
-                entries.slice(1).forEach(function(e,i){
-                  if(i>0)html+='<div class="fp-cat3-list-sep"></div>';
-                  html+='<a href="'+esc3(getLink3(e))+'" class="fp-cat3-list-item"><h6 class="fp-cat3-list-title">'+esc3(e.title.$t)+'</h6></a>';
-                });
-                html+='</div>';
-                html+='<div class="fp-cat3-list-sep"></div>';
-                body.innerHTML=html;
-              })
-              .catch(function(){body.innerHTML='';});
-          });
+          // Function disabled. The 3-column grid logic is now handled directly inside index-v3.xml
         }
         
         if (document.readyState === 'loading') {
