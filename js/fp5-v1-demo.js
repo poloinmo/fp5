@@ -230,7 +230,7 @@ window.initDynamicForms = function() {
           '          <label class="fp2-floating-label" style="left: 1rem; padding: 0 4px;">Correo electrónico *</label>' +
           '        </div>' +
           '        <button type="submit" class="fp-dyn-submit" style="flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; background-color: #ffffff; color: #1f1f1f; border: 1px solid #bebebe; border-radius: 9999px; padding: 0.4rem 1rem; font-family: var(--fp-sans); font-weight: 500; font-size: 0.875rem; cursor: pointer; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.08); transition: box-shadow 0.2s, border-color 0.2s;" onmouseover="this.style.boxShadow=\'0 2px 6px rgba(0,0,0,0.15)\';this.style.borderColor=\'#9c9c9c\';" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(0,0,0,0.08)\';this.style.borderColor=\'#bebebe\';">' +
-          '          Suscribirse' +
+          '          Enviar' +
           '        </button>' +
           '      </div>' +
           '      <div class="fp-dyn-err-msg" style="display: none; color: #ab0030; font-size: 0.8125rem; font-family: var(--fp-sans); font-weight: bold; text-align: center; margin-top: 0.75rem;">* Campo obligatorio. Ingresá un correo válido.</div>' +
