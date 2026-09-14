@@ -229,11 +229,11 @@ window.initDynamicForms = function() {
           '          <input name="EMAIL" class="fp2-input-field fp-dyn-email" type="email" placeholder=" " required="required" style="width:100%; border: 1px solid #c0c0c0; padding: 0.5rem 1rem; outline: none; font-family: var(--fp-sans); font-size: 0.9375rem; transition: border-color 0.2s; box-sizing: border-box; background-color: #ffffff;" />' +
           '          <label class="fp2-floating-label" style="left: 1rem; padding: 0 4px;">Correo electrónico *</label>' +
           '        </div>' +
-          '        <button type="submit" class="fp-dyn-submit" style="flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; background-color: #ffffff; color: #1f1f1f; border: 1.5px solid #1f1f1f; border-radius: 9999px; padding: 0.4rem 1rem; font-family: inherit; font-weight: bold; font-size: 0.875rem; cursor: pointer; white-space: nowrap; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color=\'#ab0030\';this.style.borderColor=\'#ab0030\';" onmouseout="this.style.color=\'#1f1f1f\';this.style.borderColor=\'#1f1f1f\';">' +
+          '        <button type="submit" class="fp-dyn-submit" style="flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; background-color: #ffffff; color: #1D3343; border: 1px solid #1D3343; border-radius: 9999px; padding: 0.4rem 1rem; font-family: inherit; font-weight: 500; font-size: 0.875rem; cursor: pointer; white-space: nowrap; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color=\'#035C80\';this.style.borderColor=\'#035C80\';" onmouseout="this.style.color=\'#1D3343\';this.style.borderColor=\'#1D3343\';">' +
           '          Enviar' +
           '        </button>' +
           '      </div>' +
-          '      <div class="fp-dyn-err-msg" style="display: none; color: #ab0030; font-size: 0.8125rem; font-family: var(--fp-sans); font-weight: bold; text-align: center; margin-top: 0.75rem;">* Campo obligatorio. Ingresá un correo válido.</div>' +
+          '      <div class="fp-dyn-err-msg" style="display: none; color: #035C80; font-size: 0.8125rem; font-family: var(--fp-sans); font-weight: bold; text-align: center; margin-top: 0.75rem;">* Campo obligatorio. Ingresá un correo válido.</div>' +
           '    </form>' +
           '    <div class="fp-dyn-ok" style="display: none; color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 1rem; margin-top: 1rem; text-align: center; font-family: var(--fp-sans); font-size: 0.875rem; font-weight: bold; max-width: 480px; margin-left: auto; margin-right: auto;">' +
           '      Listo. Vas a recibir solo lo que vale la pena.' +
@@ -387,7 +387,7 @@ window.initDynamicForms = function() {
             }
             
             if (f.classList.contains('fp-dyn-email')) {
-              f.style.borderColor = '#ab0030';
+              f.style.borderColor = '#035C80';
             }
           }
         });
@@ -530,7 +530,7 @@ window.initDynamicForms = function() {
       var icon = btnFav.querySelector('svg') || btnFav.querySelector('i');
       if (isFav && icon) {
         icon.setAttribute('fill', 'currentColor');
-        btnFav.style.color = '#ab0030';
+        btnFav.style.color = '#035C80';
       }
       btnFav.onclick = function() {
         var idx = favs.findIndex(function(f) { return f.url === propUrl; });
@@ -540,7 +540,7 @@ window.initDynamicForms = function() {
           if (icon) { icon.setAttribute('fill', 'none'); btnFav.style.color = ''; }
         } else {
           favs.push({ url: propUrl, title: propTitle });
-          if (icon) { icon.setAttribute('fill', 'currentColor'); btnFav.style.color = '#ab0030'; }
+          if (icon) { icon.setAttribute('fill', 'currentColor'); btnFav.style.color = '#035C80'; }
         }
         try { localStorage.setItem('fp_favorites', JSON.stringify(favs)); } catch(e) {}
       };
