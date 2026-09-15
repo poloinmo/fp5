@@ -746,7 +746,16 @@ document.addEventListener("DOMContentLoaded", function() {
       5: '', // Interior del artículo ($ads={5})
       6: '', // Columna Lateral Derecha (Primer anuncio)
       7: '', // Columna Lateral Derecha (Segundo anuncio)
-      8: '', // Tercera Columna (Sticky)
+      8: '<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1203561848944112" crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-7l+er-i-q+3d"
+     data-ad-client="ca-pub-1203561848944112"
+     data-ad-slot="1985170518"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>', // Tercera Columna (Sticky)
       9: '', // Portada (tras Tapa 1)
       10: '', // Portada (tras Tapa 2)
       11: ''  // Portada (tras Tapa 3)
