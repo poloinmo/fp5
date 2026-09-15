@@ -730,3 +730,114 @@ document.addEventListener("DOMContentLoaded", function() {
   if (typeof window.initPropertyLogic === "function") window.initPropertyLogic();
   if (typeof window.initFinancials === "function") window.initFinancials();
 });
+
+
+/* ============================================================================ */
+/* SISTEMA DE ANUNCIOS INTEGRADO (Reemplaza a los Widgets de Blogger) */
+/* ============================================================================ */
+(function() {
+  function initDynamicAds() {
+    // Aquí puedes pegar el código de AdSense o cualquier HTML para cada slot
+    const adCodes = {
+      1: '', // Interior del artículo ($ads={1})
+      2: '', // Interior del artículo ($ads={2})
+      3: '', // Bloque Dúo Inferior (Columna Izquierda)
+      4: '', // Bloque Dúo Inferior (Columna Derecha)
+      5: '', // Interior del artículo ($ads={5})
+      6: '', // Columna Lateral Derecha (Primer anuncio)
+      7: '', // Columna Lateral Derecha (Segundo anuncio)
+      8: '', // Tercera Columna (Sticky)
+      9: '', // Portada (tras Tapa 1)
+      10: '', // Portada (tras Tapa 2)
+      11: ''  // Portada (tras Tapa 3)
+    };
+
+    function createAdWrapper(n, content, includeLabel) {
+      if (!content || content.trim() === '') return null;
+      const w = document.createElement('div');
+      w.className = 'fp-ad-slot fp-ad-slot-' + n;
+      w.innerHTML = (includeLabel ? '<span class="sidebar-ad-label">PUBLICIDAD</span>' : '') + content;
+      
+      // Ejecutar scripts (necesario para AdSense)
+      w.querySelectorAll('script').forEach(function(oldScript) {
+        var newScript = document.createElement('script');
+        Array.from(oldScript.attributes).forEach(function(attr) {
+          newScript.setAttribute(attr.name, attr.value);
+        });
+        if(oldScript.innerHTML) {
+          newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+        }
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+      });
+      return w;
+    }
+
+    // 1. Reemplazar $ads={1}, $ads={2}, $ads={5} en el texto
+    document.querySelectorAll('.post-body p, .post-body b, .post-body strong, .articulo-nuevo p, .articulo-nuevo b, .articulo-nuevo strong').forEach(function(el){
+      const tx = (el.textContent||'').trim();
+      const m = tx.match(/^\$ads=\{(\d+)\}$/);
+      if(!m) return;
+      const n = parseInt(m[1], 10);
+      const target = (el.tagName === 'P') ? el : (el.closest('p') || el);
+      
+      if (adCodes[n]) {
+        const slot = createAdWrapper(n, adCodes[n], true);
+        if (slot) target.parentNode.insertBefore(slot, target);
+      }
+      target.style.display = 'none';
+    });
+
+    // 2. Inyectar Bloque Dúo Inferior (Ads 3 y 4)
+    const barParent = document.querySelector('.articulo-nuevo');
+    const informeWrap = document.querySelector('.fp-informe-wrapper');
+    if (barParent && informeWrap) {
+      const adSlot3 = createAdWrapper(3, adCodes[3], true);
+      const adSlot4 = createAdWrapper(4, adCodes[4], true);
+      
+      if (adSlot3 || adSlot4) {
+        const adsDuoWrap = document.createElement('div');
+        adsDuoWrap.className = 'fp-ads-duo-block w-full not-prose';
+        const col1 = document.createElement('div'); col1.className = 'fp-ads-duo-col';
+        const col2 = document.createElement('div'); col2.className = 'fp-ads-duo-col';
+        if(adSlot3) col1.appendChild(adSlot3);
+        if(adSlot4) col2.appendChild(adSlot4);
+        adsDuoWrap.appendChild(col1);
+        adsDuoWrap.appendChild(col2);
+        barParent.insertBefore(adsDuoWrap, informeWrap.nextSibling || null);
+      }
+    }
+
+    // 3. Inyectar Slots Fijos (6-11)
+    const fixedSlots = {
+      6: 'sidebar-ad-1',
+      7: 'sidebar-ad-2',
+      8: 'third-ad-slot',
+      9: 'fp-portada-ad-9',
+      10: 'fp-portada-ad-10',
+      11: 'fp-portada-ad-11'
+    };
+
+    for (const n in fixedSlots) {
+      const slotEl = document.getElementById(fixedSlots[n]);
+      if (slotEl && adCodes[n] && adCodes[n].trim() !== '') {
+        // Para sidebar añadimos etiqueta, para portada ya la tiene el HTML nativo
+        const needsLabel = (n < 9); 
+        const slot = createAdWrapper(n, adCodes[n], needsLabel); 
+        
+        // Evitar duplicar etiqueta PUBLICIDAD en sidebar si ya existe
+        var existingLabel = slotEl.querySelector('.sidebar-ad-label');
+        if (existingLabel) existingLabel.remove();
+        
+        slotEl.appendChild(slot);
+        slotEl.style.cssText = "display: block !important; visibility: visible !important; opacity: 1 !important; min-height: 50px !important;";
+      }
+    }
+  }
+
+  // Ejecutar al cargar
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicAds);
+  } else {
+    initDynamicAds();
+  }
+})();
