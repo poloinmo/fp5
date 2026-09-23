@@ -286,11 +286,11 @@ window.initDynamicForms = function() {
           '          <input name="EMAIL" class="fp2-input-field fp-dyn-email" type="email" placeholder=" " required="required" style="width:100%; border: 1px solid #c0c0c0; padding: 0.5rem 1rem; outline: none; font-family: var(--fp-sans); font-size: 0.9375rem; transition: border-color 0.2s; box-sizing: border-box; background-color: #ffffff;" />' +
           '          <label class="fp2-floating-label" style="left: 1rem; padding: 0 4px;">Correo electrónico *</label>' +
           '        </div>' +
-          '        <button type="submit" class="fp-dyn-submit" style="flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; background-color: #ffffff; color: #1f1f1f; border: 1px solid #bebebe; border-radius: 9999px; padding: 0.4rem 1rem; font-family: var(--fp-sans); font-weight: 500; font-size: 0.875rem; cursor: pointer; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.08); transition: box-shadow 0.2s, border-color 0.2s;" onmouseover="this.style.boxShadow=\'0 2px 6px rgba(0,0,0,0.15)\';this.style.borderColor=\'#9c9c9c\';" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(0,0,0,0.08)\';this.style.borderColor=\'#bebebe\';">' +
-          '          Suscribirse' +
+          '        <button type="submit" class="fp-dyn-submit" style="flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; background-color: #ffffff; color: #1D3343; border: 1.5px solid #1D3343; border-radius: 9999px; padding: 0.4rem 1rem; font-family: var(--fp-sans); font-weight: bold; font-size: 0.875rem; cursor: pointer; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.08); transition: box-shadow 0.2s, border-color 0.2s;" onmouseover="this.style.boxShadow=\'0 2px 6px rgba(0,0,0,0.15)\';this.style.borderColor=\'#035C80\';this.style.color=\'#035C80\';" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(0,0,0,0.08)\';this.style.borderColor=\'#1D3343\';this.style.color=\'#1D3343\';">' +
+          '          Enviar' +
           '        </button>' +
           '      </div>' +
-          '      <div class="fp-dyn-err-msg" style="display: none; color: #ab0030; font-size: 0.8125rem; font-family: var(--fp-sans); font-weight: bold; text-align: center; margin-top: 0.75rem;">* Campo obligatorio. Ingresá un correo válido.</div>' +
+          '      <div class="fp-dyn-err-msg" style="display: none; color: #035C80; font-size: 0.8125rem; font-family: var(--fp-sans); font-weight: bold; text-align: center; margin-top: 0.75rem;">* Campo obligatorio. Ingresá un correo válido.</div>' +
           '    </form>' +
           '    <div class="fp-dyn-ok" style="display: none; color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 1rem; margin-top: 1rem; text-align: center; font-family: var(--fp-sans); font-size: 0.875rem; font-weight: bold; max-width: 480px; margin-left: auto; margin-right: auto;">' +
           '      Listo. Vas a recibir solo lo que vale la pena.' +
@@ -444,7 +444,7 @@ window.initDynamicForms = function() {
             }
             
             if (f.classList.contains('fp-dyn-email')) {
-              f.style.borderColor = '#ab0030';
+              f.style.borderColor = '#035C80';
             }
           }
         });
@@ -543,37 +543,59 @@ window.initDynamicForms = function() {
       try { lucide.createIcons(); } catch(e) {}
     }
 
-    // 4. Lógica del Slider
-    var slides = document.querySelectorAll('#fpSlider .fp-slide');
-    var currentSlide = 0;
-    var dotsContainer = document.getElementById('fpDots');
-    var counter = document.getElementById('fpCounter');
-    
-    if(slides.length) {
-      slides.forEach(function(_, i) {
-        var dot = document.createElement('button');
-        dot.className = 'fp-slider-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = function() { goToSlide(i); };
-        if(dotsContainer) dotsContainer.appendChild(dot);
+    // 4. Lógica del Slider (Soporte para múltiples sliders con alta robustez)
+    setTimeout(function() {
+      var sliders = document.querySelectorAll('.fp-hero-slider');
+      sliders.forEach(function(slider) {
+        var slides = slider.querySelectorAll('.fp-slide');
+        var currentSlide = 0;
+        var dotsContainer = slider.querySelector('.fp-slider-dots');
+        var counter = slider.querySelector('.fp-slider-counter');
+        
+        if(slides.length) {
+          if(dotsContainer) dotsContainer.innerHTML = '';
+          var dots = [];
+          
+          slides.forEach(function(_, i) {
+            if(dotsContainer) {
+              var dot = document.createElement('button');
+              dot.className = 'fp-slider-dot' + (i === 0 ? ' active' : '');
+              dot.onclick = function() { goToSlide(i); };
+              dotsContainer.appendChild(dot);
+              dots.push(dot);
+            }
+          });
+          
+          function updateSlider() {
+            slides.forEach(function(s, i) {
+              if (i === currentSlide) {
+                s.classList.add('active');
+                s.style.opacity = '1';
+                s.style.zIndex = '1';
+              } else {
+                s.classList.remove('active');
+                s.style.opacity = '0';
+                s.style.zIndex = '0';
+              }
+              if(dots[i]) {
+                if (i === currentSlide) dots[i].classList.add('active');
+                else dots[i].classList.remove('active');
+              }
+            });
+            if(counter) counter.innerText = (currentSlide + 1) + ' / ' + slides.length;
+          }
+          
+          function goToSlide(n) { currentSlide = n; updateSlider(); }
+          
+          var prev = slider.querySelector('.prev');
+          var next = slider.querySelector('.next');
+          if(prev) prev.onclick = function() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSlider(); };
+          if(next) next.onclick = function() { currentSlide = (currentSlide + 1) % slides.length; updateSlider(); };
+          
+          updateSlider();
+        }
       });
-      
-      var dots = document.querySelectorAll('.fp-slider-dot');
-      
-      function updateSlider() {
-        slides.forEach(function(s, i) {
-          s.classList.toggle('active', i === currentSlide);
-          if(dots[i]) dots[i].classList.toggle('active', i === currentSlide);
-        });
-        if(counter) counter.innerText = (currentSlide + 1) + ' / ' + slides.length;
-      }
-      
-      function goToSlide(n) { currentSlide = n; updateSlider(); }
-      
-      var prev = document.getElementById('fpPrev');
-      var next = document.getElementById('fpNext');
-      if(prev) prev.onclick = function() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSlider(); };
-      if(next) next.onclick = function() { currentSlide = (currentSlide + 1) % slides.length; updateSlider(); };
-    }
+    }, 800);
 
     // 5. Lógica de Favoritos (LocalStorage)
     var btnFav = document.getElementById('btn-favorito');
@@ -587,7 +609,7 @@ window.initDynamicForms = function() {
       var icon = btnFav.querySelector('svg') || btnFav.querySelector('i');
       if (isFav && icon) {
         icon.setAttribute('fill', 'currentColor');
-        btnFav.style.color = '#ab0030';
+        btnFav.style.color = '#035C80';
       }
       btnFav.onclick = function() {
         var idx = favs.findIndex(function(f) { return f.url === propUrl; });
@@ -597,7 +619,7 @@ window.initDynamicForms = function() {
           if (icon) { icon.setAttribute('fill', 'none'); btnFav.style.color = ''; }
         } else {
           favs.push({ url: propUrl, title: propTitle });
-          if (icon) { icon.setAttribute('fill', 'currentColor'); btnFav.style.color = '#ab0030'; }
+          if (icon) { icon.setAttribute('fill', 'currentColor'); btnFav.style.color = '#035C80'; }
         }
         try { localStorage.setItem('fp_favorites', JSON.stringify(favs)); } catch(e) {}
       };
