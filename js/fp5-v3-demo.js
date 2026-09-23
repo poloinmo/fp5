@@ -257,6 +257,108 @@ document.addEventListener('DOMContentLoaded', function() {
 /* MEJORAS CENTRALIZADAS (Agregadas desde la plantilla XML) */
 /* ============================================================================ */
 
+window.initLightbox = function() {
+  var lb = document.getElementById('fp-lightbox');
+  if (!lb) return;
+  
+  var mainImg = document.getElementById('fp-lightbox-main-img');
+  var thumbsContainer = document.getElementById('fp-lightbox-thumbs');
+  var counter = document.getElementById('fp-lightbox-counter');
+  var closeBtn = document.getElementById('fp-lightbox-close');
+  var prevBtn = document.getElementById('fp-lightbox-prev');
+  var nextBtn = document.getElementById('fp-lightbox-next');
+  
+  var currentImages = [];
+  var currentIndex = 0;
+  
+  function updateLightbox() {
+    if (!currentImages.length) return;
+    mainImg.src = currentImages[currentIndex];
+    counter.innerText = (currentIndex + 1) + ' / ' + currentImages.length;
+    
+    var allThumbs = thumbsContainer.querySelectorAll('.fp-lightbox-thumb');
+    allThumbs.forEach(function(t, i) {
+      if (i === currentIndex) {
+        t.classList.add('active');
+        t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        t.classList.remove('active');
+      }
+    });
+  }
+  
+  function openLightbox(images, startIndex) {
+    currentImages = images;
+    currentIndex = startIndex;
+    
+    thumbsContainer.innerHTML = '';
+    currentImages.forEach(function(src, i) {
+      var thumb = document.createElement('img');
+      thumb.src = src;
+      thumb.className = 'fp-lightbox-thumb';
+      thumb.onclick = function() {
+        currentIndex = i;
+        updateLightbox();
+      };
+      thumbsContainer.appendChild(thumb);
+    });
+    
+    updateLightbox();
+    lb.classList.add('active');
+  }
+  
+  function closeLightbox() {
+    lb.classList.remove('active');
+  }
+  
+  function nextLightbox() {
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightbox();
+  }
+  
+  function prevLightbox() {
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightbox();
+  }
+  
+  closeBtn.onclick = closeLightbox;
+  nextBtn.onclick = nextLightbox;
+  prevBtn.onclick = prevLightbox;
+  
+  // Close when clicking outside main image
+  lb.onclick = function(e) {
+    if (e.target === lb || e.target.classList.contains('fp-lightbox-content')) {
+      closeLightbox();
+    }
+  };
+  
+  // Keyboard nav
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowRight') nextLightbox();
+    else if (e.key === 'ArrowLeft') prevLightbox();
+  });
+  
+  // Wire up existing sliders (with delay to ensure DOM is ready)
+  setTimeout(function() {
+    var sliders = document.querySelectorAll('.fp-hero-slider, .fp-slider');
+    sliders.forEach(function(slider) {
+      var slideImgs = slider.querySelectorAll('.fp-slide img');
+      var imageUrls = Array.from(slideImgs).map(function(img) { return img.src || img.getAttribute('data-src'); }).filter(Boolean);
+      
+      slideImgs.forEach(function(img, i) {
+        img.style.cursor = 'zoom-in'; // visual cue
+        img.onclick = function() {
+          if(imageUrls.length > 0) openLightbox(imageUrls, i);
+        };
+      });
+    });
+  }, 1000);
+};
+
 window.initDynamicForms = function() {
     var forms = document.querySelectorAll('.fp2-dynamic-form:not(.initialized)');
     forms.forEach(function(container) {
@@ -805,6 +907,7 @@ document.addEventListener("DOMContentLoaded", function() {
       scrollObserver.observe(el);
     });
 
+  if (typeof window.initLightbox === "function") window.initLightbox();
   if (typeof window.initDynamicForms === "function") window.initDynamicForms();
   if (typeof window.initPropertyLogic === "function") window.initPropertyLogic();
   if (typeof window.initFinancials === "function") window.initFinancials();
