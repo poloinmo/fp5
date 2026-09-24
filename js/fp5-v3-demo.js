@@ -262,7 +262,7 @@ window.initReadMore = function() {
   
   var descriptions = document.querySelectorAll('.fp5-desc-text');
   descriptions.forEach(function(desc) {
-    if (desc.scrollHeight > 200) {
+    if (desc.scrollHeight > 420) {
       desc.classList.add('fp-mobile-truncate');
       
       var btn = document.createElement('button');
