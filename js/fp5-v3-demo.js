@@ -257,6 +257,37 @@ document.addEventListener('DOMContentLoaded', function() {
 /* MEJORAS CENTRALIZADAS (Agregadas desde la plantilla XML) */
 /* ============================================================================ */
 
+window.initReadMore = function() {
+  if (window.innerWidth > 768) return;
+  
+  var descriptions = document.querySelectorAll('.fp5-desc-text');
+  descriptions.forEach(function(desc) {
+    if (desc.scrollHeight > 200) {
+      desc.classList.add('fp-mobile-truncate');
+      
+      var btn = document.createElement('button');
+      btn.className = 'fp-read-more-btn is-visible';
+      btn.innerText = 'Leer más';
+      
+      btn.onclick = function() {
+        var isExpanded = desc.classList.contains('fp-expanded');
+        if (isExpanded) {
+          desc.classList.remove('fp-expanded');
+          btn.innerText = 'Leer más';
+          setTimeout(function() {
+            desc.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 10);
+        } else {
+          desc.classList.add('fp-expanded');
+          btn.innerText = 'Leer menos';
+        }
+      };
+      
+      desc.parentNode.insertBefore(btn, desc.nextSibling);
+    }
+  });
+};
+
 window.initLightbox = function() {
   var lb = document.getElementById('fp-lightbox');
   if (!lb) return;
@@ -907,6 +938,7 @@ document.addEventListener("DOMContentLoaded", function() {
       scrollObserver.observe(el);
     });
 
+  if (typeof window.initReadMore === "function") window.initReadMore();
   if (typeof window.initLightbox === "function") window.initLightbox();
   if (typeof window.initDynamicForms === "function") window.initDynamicForms();
   if (typeof window.initPropertyLogic === "function") window.initPropertyLogic();
